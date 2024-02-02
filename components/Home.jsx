@@ -7,7 +7,9 @@ import Siders from "./Siders";
 import Carousel from "./Carousel";
 import CategoryList from "./CategoyList";
 import { useTheme } from "@react-navigation/native";
+import Signup from "./Signup";
 
+import { useNavigation } from "@react-navigation/native";
 const Home = () => {
   const features = [
     {
@@ -53,7 +55,8 @@ const Home = () => {
       textColor: "#000800",
     },
   ];
-
+ 
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -74,11 +77,13 @@ const Home = () => {
       </View>
     );
   }
+   const onSignUpPress = () => {
+     navigation.navigate("SignUpScreen");
+   };
   return (
     <SafeAreaView>
-      <View className="flex flex-row items-center "></View>
       <ScrollView>
-        <Siders />
+        <Siders />       
         <Carousel />
         <View className="mt-9">
           <ProductList />

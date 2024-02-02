@@ -2,10 +2,11 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useUser } from "@clerk/clerk-expo";
 
 const CustomTabBarIcon = ({ name, children, size, color, focused }) => {
   return (
-    <View >
+    <View >      
       <MaterialCommunityIcons
         name={name}
         size={size}

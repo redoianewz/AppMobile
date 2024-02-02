@@ -404,3 +404,192 @@ const searchIpit = () => {
 };
 
 export default HeadrBar;
+----------------------------------------------------------------------
+import { StatusBar } from "expo-status-bar";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import SignUpScreen from "./SignUpScreen";
+import SignInScreen from "./SignInScreen";
+import SignInWithOAuth from "./SignInWithOAuth";
+import * as SecureStore from "expo-secure-store";
+import UseAuthExample from "./UseAuthExample";
+import SignOut from "./SignOut";
+
+export default function Login() {
+  const tokenCache = {
+    getToken(key) {
+      try {
+        return SecureStore.getItemAsync(key);
+      } catch (err) {
+        return null;
+      }
+    },
+    saveToken(key, value) {
+      try {
+        return SecureStore.setItemAsync(key, value);
+      } catch (err) {
+        return null;
+      }
+    },
+  };
+
+  return (
+    // <ClerkProvider
+    //   tokenCache={tokenCache}
+    //   publishableKey={"pk_test_c2tpbGxlZC1nbnUtODMuY2xlcmsuYWNjb3VudHMuZGV2JA"}
+    // >
+    //   <SafeAreaView style={styles.container}>
+    //     <SignedIn>
+    //       <Text>You are Signed in</Text>
+    //       <UseAuthExample />
+    //       <SignOut />
+    //     </SignedIn>
+    //     <SignedOut>
+    //       <SignInWithOAuth />
+    //       <SignUpScreen />
+    //       <SignInScreen />
+    //     </SignedOut>
+    //   </SafeAreaView>
+    // </ClerkProvider>
+
+    <ImageBackground
+      source={{
+        uri: "https://img.freepik.com/free-vector/technology-background_23-2148119855.jpg?w=2000&t=st=1689179372~exp=1689179972~hmac=8a67af351443807b8728d4c2e1b067ba4a54be7b07c038cac30bdb71291062c1",
+      }}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <View style={styles.formContainer}>
+          <View style={styles.inputGroup}>
+            <TextInput
+              style={styles.input}
+              placeholder="Username"
+              placeholderTextColor="white"
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              placeholderTextColor="white"
+              secureTextEntry
+            />
+          </View>
+
+          <TouchableOpacity style={styles.loginButton}>
+            <Text style={styles.loginButtonText}>Login</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.forgotPassword}>
+            <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.signUpLink}>
+          <Text style={styles.signUpText}>
+            Don't have an account?{" "}
+            <Text style={styles.signUpLinkText}>Sign up</Text>
+          </Text>
+        </View>
+
+        <View style={styles.socialButtonsContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialButtonText}>Twitter</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialButtonText}>Github</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ImageBackground>
+  );
+}
+
+const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    marginTop: 26,
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  formContainer: {
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    borderRadius: 20,
+    padding: 20,
+    width: 300,
+  },
+  inputGroup: {
+    marginVertical: 10,
+  },
+  input: {
+    height: 40,
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
+    borderRadius: 20,
+    padding: 10,
+    color: "white",
+  },
+  loginButton: {
+    backgroundColor: "#2196F3",
+    borderRadius: 20,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 10,
+  },
+  loginButtonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  forgotPassword: {
+    alignItems: "center",
+  },
+  forgotPasswordText: {
+    color: "white",
+  },
+  signUpLink: {
+    marginTop: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  signUpText: {
+    color: "white",
+  },
+  signUpLinkText: {
+    fontWeight: "bold",
+    color: "#2196F3",
+  },
+  socialButtonsContainer: {
+    marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: 320,
+  },
+  socialButton: {
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 20,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 150,
+  },
+  socialButtonText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+});
